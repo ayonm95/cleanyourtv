@@ -583,14 +583,14 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                     ps5AmbientGlow.animate()
                             .scaleX(hasFocus ? 1.15f : 1.0f)
                             .scaleY(hasFocus ? 1.15f : 1.0f)
-                            .alpha(hasFocus ? 1.0f : 0.55f)
+                            .alpha(hasFocus ? 1.0f : 0.65f)
                             .setDuration(hasFocus ? 220 : 180)
                             .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
                             .start();
                 }
                 if (ps5GradientRim != null) {
                     ps5GradientRim.animate()
-                            .alpha(hasFocus ? 1.0f : 0.85f)
+                            .alpha(hasFocus ? 1.0f : 0.88f)
                             .setDuration(hasFocus ? 200 : 170)
                             .start();
                 }

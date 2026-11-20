@@ -106,8 +106,8 @@ phoning home, no apps you never asked for.
 | *The grid, one glass highlight, the tile's name* | *Clock screensaver, drifts so nothing burns in* |
 | ![The aurora theme: a wallpaper and tinted pills, pushed without a rebuild](themes/aurora/screenshot.jpg) | ![Six columns and a six-app dock from a theme's config.json](themes/six-columns/screenshot.jpg) |
 | *Aurora theme, pushed with `tools/theme.sh`* | *Six columns and a six-app dock, same launcher* |
-| ![Moving a tile: held OK, chose Move, the tile is picked up and the others dim](docs/tile-move.jpg) | ![The App library: installed apps, one press adds an app back to Home](docs/app-library.jpg) |
-| *Hold OK on a tile, Move: arrows carry it, Back puts it down* | *App library: one press puts a removed app back on Home* |
+| ![Vice City theme with PS5 command widget, GTA VI key art, DualSense glyph, and Vice City sunset glow](docs/screen_gtavi_glow.png) | ![Moving a tile: held OK, chose Move, the tile is picked up and the others dim](docs/tile-move.jpg) |
+| *Vice City theme: PS5 widget with GTA VI art, DualSense glyph & sunset gradient glow* | *Hold OK on a tile, Move: arrows carry it, Back puts it down* |
 
 ## Supported TVs
 

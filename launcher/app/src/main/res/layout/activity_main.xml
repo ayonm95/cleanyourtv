@@ -118,12 +118,12 @@
         <!-- Layer 1: Ambient Halo Glow (Vice City Sunset Neon) -->
         <ImageView
             android:id="@+id/ps5AmbientGlow"
-            android:layout_width="214dp"
-            android:layout_height="150dp"
+            android:layout_width="266dp"
+            android:layout_height="189dp"
             android:layout_gravity="center"
             android:scaleType="fitXY"
             android:src="@drawable/bg_ps5_ambient_glow"
-            android:alpha="0.55"
+            android:alpha="0.65"
             android:importantForAccessibility="no" />
 
         <!-- Layer 2: Interactive Focused Game Tile (168dp x 105dp) -->
@@ -154,7 +154,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_ps5_gradient_border"
-                android:alpha="0.85"
+                android:alpha="0.90"
                 android:importantForAccessibility="no" />
 
             <!-- Subtle DualSense Controller Battery Capsule at bottom-right of the game tile -->
@@ -162,33 +162,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/bg_battery_capsule"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="14dp"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="22dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="6dp"
                     android:src="@drawable/ic_dualsense_subtle"
                     android:importantForAccessibility="no" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="3dp"
+                    android:layout_marginEnd="4dp"
                     android:singleLine="true"
                     android:text="92%"
                     android:textColor="#F2FFFFFF"
-                    android:textSize="10sp"
+                    android:textSize="11sp"
                     android:fontFamily="@string/font_medium"
                     android:letterSpacing="0.04" />
 
                 <ImageView
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
+                    android:layout_width="15dp"
+                    android:layout_height="10dp"
                     android:src="@drawable/ic_battery_subtle"
                     android:importantForAccessibility="no" />
             </LinearLayout>
