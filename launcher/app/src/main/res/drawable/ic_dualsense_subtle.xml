@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Official Sony PlayStation 5 DualSense Controller Glyph -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="15dp"
+    android:viewportWidth="32"
+    android:viewportHeight="24">
+
+    <!-- DualSense Outer White Ergonomic Shell with Flared Grips -->
+    <path
+        android:fillColor="#F5F8FA"
+        android:pathData="M 10.5,4.6 C 12.2,4.3 14.1,4.4 16.0,4.4 C 17.9,4.4 19.8,4.3 21.5,4.6 C 23.5,4.9 25.0,5.8 26.2,7.2 C 27.2,8.8 27.8,11.0 28.2,13.5 C 28.6,16.2 28.8,18.8 28.5,21.2 C 28.3,22.2 27.4,22.8 26.2,22.6 C 25.0,22.4 24.2,21.5 23.6,19.8 C 22.8,17.4 21.8,15.2 20.6,13.8 C 19.5,12.5 17.8,12.0 16.0,12.0 C 14.2,12.0 12.5,12.5 11.4,13.8 C 10.2,15.2 9.2,17.4 8.4,19.8 C 7.8,21.5 7.0,22.4 5.8,22.6 C 4.6,22.8 3.7,22.2 3.5,21.2 C 3.2,18.8 3.4,16.2 3.8,13.5 C 4.2,11.0 4.8,8.8 5.8,7.2 C 7.0,5.8 8.5,4.9 10.5,4.6 Z" />
+
+    <!-- DualSense Inner Black Trim & Analog Stick Bridge -->
+    <path
+        android:fillColor="#151921"
+        android:pathData="M 12.0,12.6 C 13.2,11.6 14.5,11.2 16.0,11.2 C 17.5,11.2 18.8,11.6 20.0,12.8 C 21.0,13.5 21.6,14.8 21.6,16.4 C 21.6,18.0 20.8,19.2 19.6,19.6 C 18.5,20.0 17.4,19.4 16.5,18.4 C 16.3,18.2 16.1,18.1 16.0,18.1 C 15.9,18.1 15.7,18.2 15.5,18.4 C 14.6,19.4 13.5,20.0 12.4,19.6 C 11.2,19.2 10.4,18.0 10.4,16.4 C 10.4,14.8 11.0,13.5 12.0,12.6 Z" />
+
+    <!-- DualSense Wide Touchpad -->
+    <path
+        android:fillColor="#1E232E"
+        android:strokeColor="#333B49"
+        android:strokeWidth="0.3"
+        android:pathData="M 11.2,4.8 L 20.8,4.8 C 21.3,4.8 21.7,5.1 21.6,5.6 L 20.8,10.0 C 20.7,10.4 20.3,10.7 19.8,10.7 L 12.2,10.7 C 11.7,10.7 11.3,10.4 11.2,10.0 L 10.4,5.6 C 10.3,5.1 10.7,4.8 11.2,4.8 Z" />
+
+    <!-- DualSense Neon Lightbar Glow (Vice City Electric Cyan #00F0FF) -->
+    <path
+        android:strokeColor="#00F0FF"
+        android:strokeWidth="0.65"
+        android:strokeLineCap="round"
+        android:pathData="M 10.0,9.8 L 10.3,4.8 C 10.4,4.2 10.8,3.9 11.5,3.9 L 20.5,3.9 C 21.2,3.9 21.6,4.2 21.7,4.8 L 22.0,9.8" />
+
+    <!-- Left Thumbstick -->
+    <path
+        android:fillColor="#0C0E14"
+        android:strokeColor="#2D3545"
+        android:strokeWidth="0.3"
+        android:pathData="M 13.2,13.8 A 2.0,2.0 0 1,0 13.201,13.8 Z" />
+    <path
+        android:fillColor="#1C222D"
+        android:strokeColor="#3D4759"
+        android:strokeWidth="0.2"
+        android:pathData="M 13.2,14.5 A 1.3,1.3 0 1,0 13.201,14.5 Z" />
+
+    <!-- Right Thumbstick -->
+    <path
+        android:fillColor="#0C0E14"
+        android:strokeColor="#2D3545"
+        android:strokeWidth="0.3"
+        android:pathData="M 18.8,13.8 A 2.0,2.0 0 1,0 18.801,13.8 Z" />
+    <path
+        android:fillColor="#1C222D"
+        android:strokeColor="#3D4759"
+        android:strokeWidth="0.2"
+        android:pathData="M 18.8,14.5 A 1.3,1.3 0 1,0 18.801,14.5 Z" />
+
+    <!-- D-Pad Directional Buttons (Left) -->
+    <path
+        android:fillColor="#2E3646"
+        android:pathData="M 7.2,6.8 h 1.1 v 1.4 h -1.1 z M 7.2,9.4 h 1.1 v 1.4 h -1.1 z M 5.9,8.0 h 1.4 v 1.1 h -1.4 z M 8.3,8.0 h 1.4 v 1.1 h -1.4 z" />
+
+    <!-- Face Action Buttons (Right) - Triangle, Circle, Cross, Square -->
+    <path
+        android:fillColor="#2E3646"
+        android:pathData="M 24.8,6.75 A 0.65,0.65 0 1,0 24.801,6.75 Z M 26.1,8.05 A 0.65,0.65 0 1,0 26.101,8.05 Z M 24.8,9.35 A 0.65,0.65 0 1,0 24.801,9.35 Z M 23.5,8.05 A 0.65,0.65 0 1,0 23.501,8.05 Z" />
+
+    <!-- PlayStation PS Center Button -->
+    <path
+        android:fillColor="#00F0FF"
+        android:pathData="M 15.8,12.5 h 0.4 v 1.0 h -0.4 z" />
+
+    <!-- Subtle Status LED -->
+    <path
+        android:fillColor="#FFE000"
+        android:pathData="M 15.5,11.1 h 1.0 v 0.3 h -1.0 z" />
+</vector>

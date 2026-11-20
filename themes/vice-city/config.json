@@ -5,7 +5,8 @@
     "com.amazon.amazonvideo.livingroom",
     "in.startv.hotstar",
     "com.google.android.youtube.tv",
-    "com.spotify.tv.android"
+    "com.spotify.tv.android",
+    "com.apple.atve.androidtv.appletv"
   ],
   "launch_actions": [
     "com.google.android.play.games=input:com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HDMI300004"
@@ -14,7 +15,13 @@
     "com.google.android.play.games=PlayStation 5"
   ],
   "app_banners": [
-    "com.google.android.play.games=banner_ps5"
+    "com.google.android.play.games=banner_ps5",
+    "com.netflix.ninja=banner_netflix",
+    "com.amazon.amazonvideo.livingroom=banner_prime",
+    "in.startv.hotstar=banner_hotstar",
+    "com.google.android.youtube.tv=banner_youtube",
+    "com.spotify.tv.android=banner_spotify",
+    "com.apple.atve.androidtv.appletv=banner_appletv"
   ],
   "dock_row": true,
   "single_row": true,
@@ -23,18 +30,19 @@
   "dock_even_padding": true,
   "dock_title": false,
   "rows_below_dock": 0,
-  "columns": 6,
+  "columns": 7,
   "icon_only_buttons": true,
   "icon_only_inputs": true,
   "inputs_connected_only": true,
   "home_ignore_channel_keys": true,
   "stock_home_redirect": "com.google.android.apps.tv.launcherx",
   "home_long_press_home": true,
+  "date_below_clock": true,
   "fade_rows": false,
   "app_glow": true,
   "ambient_glow": true,
   "background_color": "#090312",
-  "sky_intensity": 55,
+  "sky_intensity": 0,
   "wallpaper": true,
-  "wallpaper_dim": 6
+  "wallpaper_dim": 0
 }

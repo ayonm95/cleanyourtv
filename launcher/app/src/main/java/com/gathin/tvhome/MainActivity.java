@@ -559,9 +559,42 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             findViewById(R.id.clockDivider).setBackgroundColor(Color.WHITE);
         }
 
-        View btnPs5 = findViewById(R.id.btnPs5Launch);
-        if (btnPs5 != null) {
-            btnPs5.setOnClickListener(v -> openInput("com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HW151519744"));
+        View ps5Panel = findViewById(R.id.ps5Panel);
+        View ps5AmbientGlow = findViewById(R.id.ps5AmbientGlow);
+        View ps5GradientRim = findViewById(R.id.ps5GradientRim);
+        if (ps5Panel != null) {
+            ps5Panel.setOutlineProvider(new android.view.ViewOutlineProvider() {
+                @Override
+                public void getOutline(View view, android.graphics.Outline outline) {
+                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 20f * density);
+                }
+            });
+            ps5Panel.setClipToOutline(true);
+            ps5Panel.setOnClickListener(v -> openInput("com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HDMI300004"));
+            ps5Panel.setOnFocusChangeListener((v, hasFocus) -> {
+                v.animate()
+                        .scaleX(hasFocus ? 1.08f : 1.0f)
+                        .scaleY(hasFocus ? 1.08f : 1.0f)
+                        .translationZ(hasFocus ? 14f * density : 0f)
+                        .setDuration(hasFocus ? 200 : 170)
+                        .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
+                        .start();
+                if (ps5AmbientGlow != null) {
+                    ps5AmbientGlow.animate()
+                            .scaleX(hasFocus ? 1.15f : 1.0f)
+                            .scaleY(hasFocus ? 1.15f : 1.0f)
+                            .alpha(hasFocus ? 1.0f : 0.55f)
+                            .setDuration(hasFocus ? 220 : 180)
+                            .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
+                            .start();
+                }
+                if (ps5GradientRim != null) {
+                    ps5GradientRim.animate()
+                            .alpha(hasFocus ? 1.0f : 0.85f)
+                            .setDuration(hasFocus ? 200 : 170)
+                            .start();
+                }
+            });
         }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Center Hebrew greetings over the numeric time, independent of a visible AM/PM label. The clock's row

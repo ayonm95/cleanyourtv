@@ -104,100 +104,96 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <!-- PlayStation 5 Command Center Widget (PS5 on HDMI 3, DualSense, GTA VI Recent Game) -->
-    <LinearLayout
-        android:id="@+id/ps5Panel"
+    <!-- PlayStation 5 Game Widget Container with Vice City Multi-Layer Gradient Glow -->
+    <FrameLayout
+        android:id="@+id/ps5Container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|left"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="148dp"
-        android:orientation="vertical"
-        android:background="@drawable/bg_ps5_card"
-        android:paddingStart="26dp"
-        android:paddingEnd="26dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:focusable="false">
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="158dp"
+        android:clipChildren="false"
+        android:clipToPadding="false">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+        <!-- Layer 1: Ambient Halo Glow (Vice City Sunset Neon) -->
+        <ImageView
+            android:id="@+id/ps5AmbientGlow"
+            android:layout_width="214dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_ps5_ambient_glow"
+            android:alpha="0.55"
+            android:importantForAccessibility="no" />
 
+        <!-- Layer 2: Interactive Focused Game Tile (168dp x 105dp) -->
+        <FrameLayout
+            android:id="@+id/ps5Panel"
+            android:layout_width="168dp"
+            android:layout_height="105dp"
+            android:layout_gravity="center"
+            android:focusable="true"
+            android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:nextFocusDown="@+id/grid">
+
+            <!-- GTA VI Key Art -->
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_playstation"
-                android:layout_marginEnd="10dp"
+                android:id="@+id/ps5GameArt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_gtavi_card"
+                android:contentDescription="Grand Theft Auto VI" />
+
+            <!-- Layer 3: Vice City Multi-Layer Gradient Border (Neon Rim + Glass Sheen) -->
+            <ImageView
+                android:id="@+id/ps5GradientRim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_ps5_gradient_border"
+                android:alpha="0.85"
                 android:importantForAccessibility="no" />
 
-            <TextView
-                android:id="@+id/ps5Kicker"
+            <!-- Subtle DualSense Controller Battery Capsule at bottom-right of the game tile -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="ACTIVE • HDMI 3 (4K 120Hz ALLM VRR)"
-                android:textColor="#FF06B6D4"
-                android:textSize="11sp"
-                android:fontFamily="@string/font_medium"
-                android:letterSpacing="0.18"
-                android:textAllCaps="true" />
-        </LinearLayout>
+                android:layout_gravity="bottom|end"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/bg_battery_capsule"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/ps5Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:singleLine="true"
-            android:text="PlayStation 5 Console"
-            android:textColor="#FFFFFFFF"
-            android:textSize="32sp"
-            android:fontFamily="@string/font_medium"
-            android:letterSpacing="-0.01"
-            android:includeFontPadding="false" />
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/ic_dualsense_subtle"
+                    android:importantForAccessibility="no" />
 
-        <TextView
-            android:id="@+id/ps5Status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:singleLine="true"
-            android:text="DualSense: 92% Battery • Sony Bravia Sync Ready"
-            android:textColor="#B3FFFFFF"
-            android:textSize="12sp"
-            android:fontFamily="@string/font_regular" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:singleLine="true"
+                    android:text="92%"
+                    android:textColor="#F2FFFFFF"
+                    android:textSize="10sp"
+                    android:fontFamily="@string/font_medium"
+                    android:letterSpacing="0.04" />
 
-        <TextView
-            android:id="@+id/ps5RecentGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:singleLine="true"
-            android:text="Recent Game: Grand Theft Auto VI • Ocean Drive Heat (78% Trophy)"
-            android:textColor="#FFF43F5E"
-            android:textSize="12sp"
-            android:fontFamily="@string/font_medium" />
-
-        <TextView
-            android:id="@+id/btnPs5Launch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:paddingStart="22dp"
-            android:paddingEnd="22dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
-            android:background="@drawable/btn_ps5_launch"
-            android:text="Switch to HDMI 3 (PS5) ➔"
-            android:textColor="#FFFFFFFF"
-            android:textSize="13sp"
-            android:fontFamily="@string/font_medium"
-            android:focusable="true"
-            android:clickable="true" />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_battery_subtle"
+                    android:importantForAccessibility="no" />
+            </LinearLayout>
+        </FrameLayout>
+    </FrameLayout>
 
     <!-- Cinematic top shelf: darkens the edge behind the shelf and the lower half, so the text and the
          dock stay readable over the artwork. -->
@@ -307,9 +303,9 @@
                         android:format12Hour="h:mm"
                         android:format24Hour="HH:mm"
                         android:textColor="#FFFFFFFF"
-                        android:textSize="52sp"
-                        android:fontFamily="@string/font_light"
-                        android:letterSpacing="-0.04"
+                        android:textSize="58sp"
+                        android:fontFamily="@string/font_medium"
+                        android:letterSpacing="-0.01"
                         android:fontFeatureSettings="tnum"
                         android:includeFontPadding="false" />
 
@@ -317,15 +313,15 @@
                         android:id="@+id/ampm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
+                        android:layout_marginStart="10dp"
                         android:layout_gravity="bottom"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="11dp"
                         android:format12Hour="a"
                         android:format24Hour=""
                         android:textColor="#B3FFFFFF"
-                        android:textSize="15sp"
+                        android:textSize="16sp"
                         android:fontFamily="@string/font_medium"
-                        android:letterSpacing="0.08"
+                        android:letterSpacing="0.10"
                         android:textAllCaps="true" />
 
                     <View
@@ -333,8 +329,8 @@
                         android:layout_width="1dp"
                         android:layout_height="26dp"
                         android:layout_gravity="bottom"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="18dp"
                         android:layout_marginBottom="8dp"
                         android:background="#33FFFFFF" />
 
@@ -356,7 +352,7 @@
                             android:ellipsize="end"
                             android:textColor="#E6FFFFFF"
                             android:textSize="17sp"
-                            android:fontFamily="@string/font_regular"
+                            android:fontFamily="@string/font_medium"
                             android:letterSpacing="0.02"
                             android:includeFontPadding="false"
                             android:visibility="gone" />
@@ -372,10 +368,10 @@
                             android:ellipsize="end"
                             android:format12Hour="@string/date_format_home"
                             android:format24Hour="@string/date_format_home"
-                            android:textColor="#A6FFFFFF"
-                            android:textSize="14sp"
-                            android:fontFamily="@string/font_regular"
-                            android:letterSpacing="0.14"
+                            android:textColor="#D9FFFFFF"
+                            android:textSize="15sp"
+                            android:fontFamily="@string/font_medium"
+                            android:letterSpacing="0.12"
                             android:textAllCaps="true" />
 
                         <!-- Lunar date ("Lunar 13/9 · Year of the Horse"), shown when lunar_date is on. -->

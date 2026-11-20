@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="16dp" android:height="16dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <!-- Horizontal battery body outline -->
+    <path android:fillColor="#80FFFFFF"
+        android:pathData="M16,7H4C2.9,7 2,7.9 2,9v6c0,1.1 0.9,2 2,2h12c1.1,0 2,-0.9 2,-2v-1h2v-4h-2V9C18,7.9 17.1,7 16,7zm0,8H4V9h12v6z"/>
+    <!-- Active Charge Level (Vice City Electric Cyan #00F0FF) -->
+    <path android:fillColor="#E600F0FF"
+        android:pathData="M5,10.2h9.5v3.6H5z"/>
+</vector>
