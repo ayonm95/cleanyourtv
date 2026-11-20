@@ -1,10 +1,20 @@
 {
   "dock_apps": [
+    "com.google.android.play.games",
     "com.netflix.ninja",
     "com.amazon.amazonvideo.livingroom",
     "in.startv.hotstar",
     "com.google.android.youtube.tv",
     "com.spotify.tv.android"
+  ],
+  "launch_actions": [
+    "com.google.android.play.games=input:com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HDMI300004"
+  ],
+  "app_labels": [
+    "com.google.android.play.games=PlayStation 5"
+  ],
+  "app_banners": [
+    "com.google.android.play.games=banner_ps5"
   ],
   "dock_row": true,
   "single_row": true,
@@ -13,7 +23,7 @@
   "dock_even_padding": true,
   "dock_title": false,
   "rows_below_dock": 0,
-  "columns": 5,
+  "columns": 6,
   "icon_only_buttons": true,
   "icon_only_inputs": true,
   "inputs_connected_only": true,

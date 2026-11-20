@@ -104,6 +104,101 @@
             android:visibility="gone" />
     </LinearLayout>
 
+    <!-- PlayStation 5 Command Center Widget (PS5 on HDMI 3, DualSense, GTA VI Recent Game) -->
+    <LinearLayout
+        android:id="@+id/ps5Panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|left"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="148dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_ps5_card"
+        android:paddingStart="26dp"
+        android:paddingEnd="26dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:focusable="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_playstation"
+                android:layout_marginEnd="10dp"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/ps5Kicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="ACTIVE • HDMI 3 (4K 120Hz ALLM VRR)"
+                android:textColor="#FF06B6D4"
+                android:textSize="11sp"
+                android:fontFamily="@string/font_medium"
+                android:letterSpacing="0.18"
+                android:textAllCaps="true" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ps5Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:singleLine="true"
+            android:text="PlayStation 5 Console"
+            android:textColor="#FFFFFFFF"
+            android:textSize="32sp"
+            android:fontFamily="@string/font_medium"
+            android:letterSpacing="-0.01"
+            android:includeFontPadding="false" />
+
+        <TextView
+            android:id="@+id/ps5Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:singleLine="true"
+            android:text="DualSense: 92% Battery • Sony Bravia Sync Ready"
+            android:textColor="#B3FFFFFF"
+            android:textSize="12sp"
+            android:fontFamily="@string/font_regular" />
+
+        <TextView
+            android:id="@+id/ps5RecentGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:singleLine="true"
+            android:text="Recent Game: Grand Theft Auto VI • Ocean Drive Heat (78% Trophy)"
+            android:textColor="#FFF43F5E"
+            android:textSize="12sp"
+            android:fontFamily="@string/font_medium" />
+
+        <TextView
+            android:id="@+id/btnPs5Launch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:background="@drawable/btn_ps5_launch"
+            android:text="Switch to HDMI 3 (PS5) ➔"
+            android:textColor="#FFFFFFFF"
+            android:textSize="13sp"
+            android:fontFamily="@string/font_medium"
+            android:focusable="true"
+            android:clickable="true" />
+    </LinearLayout>
+
     <!-- Cinematic top shelf: darkens the edge behind the shelf and the lower half, so the text and the
          dock stay readable over the artwork. -->
     <View

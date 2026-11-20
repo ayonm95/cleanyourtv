@@ -558,6 +558,11 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             ((TextView) findViewById(R.id.date)).setTextColor(Color.WHITE);
             findViewById(R.id.clockDivider).setBackgroundColor(Color.WHITE);
         }
+
+        View btnPs5 = findViewById(R.id.btnPs5Launch);
+        if (btnPs5 != null) {
+            btnPs5.setOnClickListener(v -> openInput("com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HW151519744"));
+        }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Center Hebrew greetings over the numeric time, independent of a visible AM/PM label. The clock's row
             // is watched too: date_below_clock can move the whole row right under a wider date.
