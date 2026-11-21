@@ -252,9 +252,14 @@ public class HomeKeyService extends AccessibilityService {
     }
 
     private boolean isSettingsKey(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_SETTINGS) return true;
+        int code = event.getKeyCode();
+        if (code == KeyEvent.KEYCODE_SETTINGS
+                || code == 83 /* KEYCODE_NOTIFICATION */
+                || code == KeyEvent.KEYCODE_MENU
+                || code == 177 /* KEYCODE_QUICK_SETTINGS */
+                || code == KeyEvent.KEYCODE_HELP) return true;
         if (isSettingsScancode(event)) return true;
-        for (int code : settingsKeycodes) if (event.getKeyCode() == code) return true;
+        for (int c : settingsKeycodes) if (code == c) return true;
         return false;
     }
 
@@ -275,6 +280,19 @@ public class HomeKeyService extends AccessibilityService {
         boolean settingsKey = isSettingsKey(event);
         String tap = inFront(appKeys, frontAppKeys, event.getKeyCode());
         String hold = holdAppKeys.get(event.getKeyCode());
+        if (tap == null) {
+            int code = event.getKeyCode();
+            int scan = event.getScanCode();
+            if (code == KeyEvent.KEYCODE_BUTTON_4 || code == KeyEvent.KEYCODE_BUTTON_1 || code == 4062 || scan == 758) {
+                tap = "com.netflix.ninja";
+            } else if (code == KeyEvent.KEYCODE_BUTTON_14 || code == KeyEvent.KEYCODE_BUTTON_3 || scan == 569 || scan == 485) {
+                tap = "com.google.android.youtube.tv";
+            } else if (code == KeyEvent.KEYCODE_BUTTON_2 || code == KeyEvent.KEYCODE_BUTTON_5 || scan == 652 || scan == 490) {
+                tap = "com.amazon.amazonvideo.livingroom";
+            } else if (code == KeyEvent.KEYCODE_BUTTON_15 || scan == 653 || scan == 491) {
+                tap = "in.startv.hotstar";
+            }
+        }
         if ((!settingsKey || (tap != null && !isSettingsScancode(event))) && RemoteKeys.handle(this, event, tap, hold)) {
             return true;
         }
@@ -283,11 +301,21 @@ public class HomeKeyService extends AccessibilityService {
             RemoteKeys.handle(this, event, null, hold);
             boolean held = hold != null && event.getEventTime() - event.getDownTime() >= RemoteKeys.HOLD_MS;
             if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled() && !held) {
-                Intent open = settingsPanel ? new Intent(this, QuickSettingsActivity.class)
-                        : SystemSettings.intent(this, Settings.ACTION_SETTINGS);
-                // settings_key_clear_task: on MediaTek boards KEYCODE_SETTINGS is also a global key that opens Display &
-                // Sound in the Settings task before this helper sees it; cleared, Back from Settings goes Home, not there.
-                if (settingsClearTask && !settingsPanel) open.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent sonySettings = new Intent();
+                sonySettings.setComponent(new ComponentName("com.sony.dtv.smartui", "com.sony.dtv.smartui.settings.SmartSettingsActivity"));
+                Intent open = null;
+                try {
+                    if (getPackageManager().resolveActivity(sonySettings, 0) != null) {
+                        open = sonySettings;
+                    }
+                } catch (Exception ignored) { }
+                if (open == null) {
+                    open = settingsPanel ? new Intent(this, QuickSettingsActivity.class)
+                            : SystemSettings.intent(this, Settings.ACTION_SETTINGS);
+                    // settings_key_clear_task: on MediaTek boards KEYCODE_SETTINGS is also a global key that opens Display &
+                    // Sound in the Settings task before this helper sees it; cleared, Back from Settings goes Home, not there.
+                    if (settingsClearTask && !settingsPanel) open.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                }
                 try {
                     startActivity(open.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                 } catch (ActivityNotFoundException | SecurityException unavailable) {
@@ -305,9 +333,15 @@ public class HomeKeyService extends AccessibilityService {
             redirectHomeKey(event);
             return false;
         }
-        if (event.getKeyCode() != KeyEvent.KEYCODE_ALL_APPS) return false;
-        if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) openHome();
-        return true;
+        if (event.getKeyCode() == KeyEvent.KEYCODE_ALL_APPS || event.getKeyCode() == 171) {
+            if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                startActivity(new Intent(this, MainActivity.class)
+                        .setAction(MainActivity.ACTION_APP_LIBRARY)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+            return true;
+        }
+        return false;
     }
 
     /** Unbound by Android: the user turned the helper off, so Home doesn't put it back (ServiceRepair). */

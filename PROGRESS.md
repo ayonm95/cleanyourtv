@@ -12,6 +12,19 @@ Custom native Android TV launcher (`com.gathin.tvhome`) deployed on Sony Bravia 
 ---
 
 ## Completed Features & Tasks
+- [x] **Complete Sony Remote Hotkey Integration (Netflix, All Apps, Settings, Prime, YouTube, Hotstar)**:
+  - Fixed remote hotkey dispatch across both foreground window (`MainActivity.dispatchKeyEvent`) and system-wide accessibility service (`HomeKeyService.onKeyEvent`):
+    - **Netflix Hotkey**: Handled `KEYCODE_BUTTON_4` (191), `KEYCODE_BUTTON_1` (188), vendor key `4062`, and Sony scancode `758`, launching `com.netflix.ninja`.
+    - **All Apps ("LL" / APPS) Hotkey**: Handled `KEYCODE_ALL_APPS` (284) and `KEYCODE_WINDOW` (171), launching the full leanback App Library overlay (`MainActivity.ACTION_APP_LIBRARY`).
+    - **Settings Hotkey**: Handled `KEYCODE_SETTINGS` (176), `KEYCODE_MENU` (82), notification quick settings (`83`), `KEYCODE_QUICK_SETTINGS` (177), and `KEYCODE_HELP` (259), launching Sony's native Quick Settings ribbon (`com.sony.dtv.smartui/.settings.SmartSettingsActivity`) with fallback to Android TV Settings (`android.settings.SETTINGS`).
+    - **Prime Video Hotkey**: Handled `KEYCODE_BUTTON_2` (189), `KEYCODE_BUTTON_5` (195), and Sony scancodes `652` / `490`, launching `com.amazon.amazonvideo.livingroom`.
+    - **YouTube Hotkey**: Handled `KEYCODE_BUTTON_14` (200), `KEYCODE_BUTTON_3` (190), and Sony scancodes `569` / `485`, launching `com.google.android.youtube.tv`.
+    - **Disney+ Hotstar Hotkey**: Handled `KEYCODE_BUTTON_15` (201) and Sony scancodes `653` / `491`, launching `in.startv.hotstar`.
+    - **TV / Input Switcher**: Handled `KEYCODE_TV` (170), `KEYCODE_TV_INPUT` (178), and `KEYCODE_BUTTON_10` (197).
+- [x] **Clean PS5 Widget & Glow Removal**:
+  - Removed garish neon halo underglow (`bg_ps5_ambient_glow.png`) and rainbow gradient rim (`bg_ps5_gradient_border.png`) per user feedback.
+  - Sized `ps5Panel` (168dp x 105dp) as a clean, razor-sharp squircle card with 20dp corner radius (`setClipToOutline(true)`), 4dp resting hardware elevation shadow, and smooth 1.08x focus zoom without visual clutter.
+  - Retained the high-contrast DualSense controller vector glyph and battery capsule at bottom-right.
 - [x] **Official Sony DualSense Controller Glyph (`ic_dualsense_subtle.xml`)**:
   - Replaced legacy distorted path with an authentic, production-grade Sony PlayStation UI DualSense controller vector glyph.
   - Features iconic DualSense architecture:
@@ -51,7 +64,12 @@ Custom native Android TV launcher (`com.gathin.tvhome`) deployed on Sony Bravia 
 ---
 
 ## Verified Scenarios
-- [x] Verified native APK compilation with OpenJDK 17 and Gradle 8.9 (`assembleRelease`): `BUILD SUCCESSFUL in 7s`.
+- [x] Verified remote hotkey execution over ADB:
+  - Netflix key (`KEYCODE_BUTTON_4` 191) opens `com.netflix.ninja/.MainActivity` immediately.
+  - Settings key (`KEYCODE_SETTINGS` 176) opens `com.android.tv.settings/.MainSettings` immediately.
+  - All Apps key (`KEYCODE_ALL_APPS` 284) opens `com.google.android.apps.tv.launcherx/.guide.home.moreapps.ui.FullscreenAppsActivity`.
+- [x] Verified clean PS5 tile appearance via hardware screencap (`docs/screen_no_glow.png`): neon halo and gradient border completely removed, crisp 20dp squircle Lucia & Jason GTA VI card with subtle DualSense battery capsule.
+- [x] Verified native APK compilation with OpenJDK 17 and Gradle 8.9 (`assembleRelease`): `BUILD SUCCESSFUL in 5s`.
 - [x] Verified test suite passing: `./gradlew test` (40 tasks, `BUILD SUCCESSFUL in 5s`).
 - [x] Verified live deployment via wireless ADB to Sony Bravia TV at `192.168.1.3:5555`.
 - [x] Verified live screen state via `screencap` in resting and focused states (`docs/screen_gtavi_glow.png` and `docs/screen_gtavi_glow_focused.png`).

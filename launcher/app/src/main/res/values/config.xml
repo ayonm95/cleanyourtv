@@ -185,6 +185,11 @@
          a temporary `Log.d` in the helper's `onKeyEvent`: `getKeyCode()`, `getScanCode()`, `getDeviceId()`, read
          after a HOME_KEY_SERVICE=1 rebuild. Leave empty to omit. -->
     <integer-array name="settings_key_keycodes">
+        <item>176</item>
+        <item>82</item>
+        <item>83</item>
+        <item>177</item>
+        <item>259</item>
     </integer-array>
     <!-- What those Settings buttons open: false, the TV's Settings; true, a small glass panel at the top right
          with TV settings, Display, Network, Apps (re-enable an app) and Launcher settings, over whatever is on screen.
@@ -245,6 +250,29 @@
          where the firmware hands KEYCODE_GUIDE (172) to the stock launcher and no app ever receives it. Leave empty
          to omit. -->
     <string-array name="app_keys" translatable="false">
+        <item>191:com.netflix.ninja</item>
+        <item>188:com.netflix.ninja</item>
+        <item>4062:com.netflix.ninja</item>
+        <item>scan:758:com.netflix.ninja</item>
+        <item>200:com.google.android.youtube.tv</item>
+        <item>190:com.google.android.youtube.tv</item>
+        <item>scan:569:com.google.android.youtube.tv</item>
+        <item>scan:485:com.google.android.youtube.tv</item>
+        <item>189:com.amazon.amazonvideo.livingroom</item>
+        <item>195:com.amazon.amazonvideo.livingroom</item>
+        <item>scan:652:com.amazon.amazonvideo.livingroom</item>
+        <item>scan:490:com.amazon.amazonvideo.livingroom</item>
+        <item>201:in.startv.hotstar</item>
+        <item>scan:653:in.startv.hotstar</item>
+        <item>scan:491:in.startv.hotstar</item>
+        <item>284:library</item>
+        <item>171:library</item>
+        <item>176:settings</item>
+        <item>82:settings</item>
+        <item>83:settings</item>
+        <item>177:settings</item>
+        <item>170:inputs</item>
+        <item>178:inputs</item>
     </string-array>
 
     <!-- Package of the stock launcher, for TVs whose firmware turns it back on after it was disabled. XGIMI's

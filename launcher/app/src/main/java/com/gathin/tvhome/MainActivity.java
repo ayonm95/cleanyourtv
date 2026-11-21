@@ -451,6 +451,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     };
 
     private java.util.Map<Integer, String> homeAppKeys = java.util.Collections.emptyMap();
+    private java.util.Map<Integer, String> homeAppScancodes = java.util.Collections.emptyMap();
     /** clock_format, for the race panel's session times (the TextClocks take it in onCreate). */
     private String clockFormat = "system";
     private java.util.Map<Integer, String> homeHoldAppKeys = java.util.Collections.emptyMap();
@@ -463,6 +464,7 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // config.xml, overlaid by config.json from a pushed theme (see Config and tools/theme.sh).
         Config cfg = Config.load(this);
         homeAppKeys = RemoteKeys.parseAppKeys(cfg.appKeys);
+        homeAppScancodes = RemoteKeys.parseAppScancodes(cfg.appKeys);
         clockFormat = cfg.clockFormat;
         ClockFormat.apply(getWindow().getDecorView(), clockFormat);
         homeHoldAppKeys = RemoteKeys.parseHoldAppKeys(cfg.appKeys);
@@ -560,8 +562,6 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         }
 
         View ps5Panel = findViewById(R.id.ps5Panel);
-        View ps5AmbientGlow = findViewById(R.id.ps5AmbientGlow);
-        View ps5GradientRim = findViewById(R.id.ps5GradientRim);
         if (ps5Panel != null) {
             ps5Panel.setOutlineProvider(new android.view.ViewOutlineProvider() {
                 @Override
@@ -570,30 +570,16 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
                 }
             });
             ps5Panel.setClipToOutline(true);
+            ps5Panel.setElevation(4f * density);
             ps5Panel.setOnClickListener(v -> openInput("com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HDMI300004"));
             ps5Panel.setOnFocusChangeListener((v, hasFocus) -> {
                 v.animate()
                         .scaleX(hasFocus ? 1.08f : 1.0f)
                         .scaleY(hasFocus ? 1.08f : 1.0f)
-                        .translationZ(hasFocus ? 14f * density : 0f)
+                        .translationZ(hasFocus ? 12f * density : 0f)
                         .setDuration(hasFocus ? 200 : 170)
                         .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
                         .start();
-                if (ps5AmbientGlow != null) {
-                    ps5AmbientGlow.animate()
-                            .scaleX(hasFocus ? 1.15f : 1.0f)
-                            .scaleY(hasFocus ? 1.15f : 1.0f)
-                            .alpha(hasFocus ? 1.0f : 0.65f)
-                            .setDuration(hasFocus ? 220 : 180)
-                            .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
-                            .start();
-                }
-                if (ps5GradientRim != null) {
-                    ps5GradientRim.animate()
-                            .alpha(hasFocus ? 1.0f : 0.88f)
-                            .setDuration(hasFocus ? 200 : 170)
-                            .start();
-                }
             });
         }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
@@ -1448,9 +1434,30 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
      * nothing even on Home.
      */
     private boolean handleSettingsKey(KeyEvent event) {
-        for (int code : settingsKeycodes) {
-            if (event.getKeyCode() != code) continue;
+        int code = event.getKeyCode();
+        boolean isSettings = code == KeyEvent.KEYCODE_SETTINGS
+                || code == 83 /* KEYCODE_NOTIFICATION / Google TV Quick Settings */
+                || code == KeyEvent.KEYCODE_MENU
+                || code == 177 /* KEYCODE_QUICK_SETTINGS */
+                || code == KeyEvent.KEYCODE_HELP;
+        if (!isSettings) {
+            for (int c : settingsKeycodes) {
+                if (code == c) {
+                    isSettings = true;
+                    break;
+                }
+            }
+        }
+        if (isSettings) {
             if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                Intent sonySettings = new Intent();
+                sonySettings.setComponent(new ComponentName("com.sony.dtv.smartui", "com.sony.dtv.smartui.settings.SmartSettingsActivity"));
+                try {
+                    if (getPackageManager().resolveActivity(sonySettings, 0) != null) {
+                        open(sonySettings);
+                        return true;
+                    }
+                } catch (Exception ignored) { }
                 Intent settings = settingsKeyPanel ? new Intent(this, QuickSettingsActivity.class)
                         : systemIntent(Settings.ACTION_SETTINGS);
                 // settings_key_clear_task, as in HomeKeyService: Back from Settings goes Home, not to a vendor page.
@@ -1479,11 +1486,41 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         // A real key, not onUserInteraction: that also runs when the firmware starts Live TV over Home at power-on.
         if (event.getAction() == KeyEvent.ACTION_DOWN) HomeKeyService.keyOnHome();
         if (homeIgnoreChannelKeys && RemoteKeys.isChannelKey(event.getKeyCode())) return true;
-        // Vendor keys (TCL Netflix button, 4062) never reach the key services, only the focused window, so their
-        // "hold:" entries run here too or nowhere. Only while resumed: onPause releases Home's holds, and a DOWN
-        // taken after that would arm one nothing releases.
-        if (resumed && event.getKeyCode() >= 1000 && RemoteKeys.handle(this, event, homeAppKeys.get(event.getKeyCode()),
-                homeHoldAppKeys.get(event.getKeyCode()))) return true;
+        // Hotkeys from remote (Netflix, YouTube, Prime, Hotstar, All Apps, TV/Inputs)
+        if (resumed) {
+            int code = event.getKeyCode();
+            int scan = event.getScanCode();
+            String target = homeAppKeys.get(code);
+            if (target == null && homeAppScancodes != null) {
+                target = homeAppScancodes.get(scan);
+            }
+            if (target == null) {
+                if (code == KeyEvent.KEYCODE_BUTTON_4 || code == KeyEvent.KEYCODE_BUTTON_1 || code == 4062 || scan == 758) {
+                    target = "com.netflix.ninja";
+                } else if (code == KeyEvent.KEYCODE_BUTTON_14 || code == KeyEvent.KEYCODE_BUTTON_3 || scan == 569 || scan == 485) {
+                    target = "com.google.android.youtube.tv";
+                } else if (code == KeyEvent.KEYCODE_BUTTON_2 || code == KeyEvent.KEYCODE_BUTTON_5 || scan == 652 || scan == 490) {
+                    target = "com.amazon.amazonvideo.livingroom";
+                } else if (code == KeyEvent.KEYCODE_BUTTON_15 || scan == 653 || scan == 491) {
+                    target = "in.startv.hotstar";
+                } else if (code == KeyEvent.KEYCODE_ALL_APPS || code == 171) {
+                    target = "library";
+                } else if (code == KeyEvent.KEYCODE_TV || code == KeyEvent.KEYCODE_TV_INPUT || code == KeyEvent.KEYCODE_BUTTON_10) {
+                    target = "inputs";
+                }
+            }
+            if (target != null) {
+                if ("library".equals(target)) {
+                    if (event.getAction() == KeyEvent.ACTION_UP && !event.isCanceled()) {
+                        onLibraryRequested();
+                    }
+                    return true;
+                }
+                if (RemoteKeys.handle(this, event, target, homeHoldAppKeys.get(code))) {
+                    return true;
+                }
+            }
+        }
         if (handleSettingsKey(event)) return true;
         if (holdOk(event)) return true;
         if (tileMenuEnabled && !reordering && openPopup == null && cardPrompt == null
