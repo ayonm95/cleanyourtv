@@ -104,66 +104,6 @@
             android:visibility="gone" />
     </LinearLayout>
 
-    <!-- PlayStation 5 Game Widget (Clean Card) -->
-    <FrameLayout
-        android:id="@+id/ps5Panel"
-        android:layout_width="168dp"
-        android:layout_height="105dp"
-        android:layout_gravity="top|left"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="158dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:nextFocusDown="@+id/grid">
-
-        <!-- GTA VI Key Art -->
-        <ImageView
-            android:id="@+id/ps5GameArt"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_gtavi_card"
-            android:contentDescription="Grand Theft Auto VI" />
-
-        <!-- Subtle DualSense Controller Battery Capsule at bottom-right of the game tile -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/bg_battery_capsule"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="22dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="6dp"
-                android:src="@drawable/ic_dualsense_subtle"
-                android:importantForAccessibility="no" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:singleLine="true"
-                android:text="92%"
-                android:textColor="#F2FFFFFF"
-                android:textSize="11sp"
-                android:fontFamily="@string/font_medium"
-                android:letterSpacing="0.04" />
-
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="10dp"
-                android:src="@drawable/ic_battery_subtle"
-                android:importantForAccessibility="no" />
-        </LinearLayout>
-    </FrameLayout>
-
     <!-- Cinematic top shelf: darkens the edge behind the shelf and the lower half, so the text and the
          dock stay readable over the artwork. -->
     <View

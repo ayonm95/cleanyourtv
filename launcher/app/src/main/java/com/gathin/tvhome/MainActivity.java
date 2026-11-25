@@ -560,28 +560,6 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
             ((TextView) findViewById(R.id.date)).setTextColor(Color.WHITE);
             findViewById(R.id.clockDivider).setBackgroundColor(Color.WHITE);
         }
-
-        View ps5Panel = findViewById(R.id.ps5Panel);
-        if (ps5Panel != null) {
-            ps5Panel.setOutlineProvider(new android.view.ViewOutlineProvider() {
-                @Override
-                public void getOutline(View view, android.graphics.Outline outline) {
-                    outline.setRoundRect(0, 0, view.getWidth(), view.getHeight(), 20f * density);
-                }
-            });
-            ps5Panel.setClipToOutline(true);
-            ps5Panel.setElevation(4f * density);
-            ps5Panel.setOnClickListener(v -> openInput("com.realtek.tv.passthrough/.hdmiinput.HDMITvInputService/HDMI300004"));
-            ps5Panel.setOnFocusChangeListener((v, hasFocus) -> {
-                v.animate()
-                        .scaleX(hasFocus ? 1.08f : 1.0f)
-                        .scaleY(hasFocus ? 1.08f : 1.0f)
-                        .translationZ(hasFocus ? 12f * density : 0f)
-                        .setDuration(hasFocus ? 200 : 170)
-                        .setInterpolator(new android.view.animation.DecelerateInterpolator(1.4f))
-                        .start();
-            });
-        }
         if (getResources().getBoolean(R.bool.rtl_menu_bar)) {
             // Center Hebrew greetings over the numeric time, independent of a visible AM/PM label. The clock's row
             // is watched too: date_below_clock can move the whole row right under a wider date.
